@@ -23,7 +23,7 @@ plt.rcParams["lines.linewidth"] = 2
 for col in predictor_columns:
     df[col] = df[col].interpolate()
 
-
+df.info()
 # --------------------------------------------------------------
 # Calculating set duration
 # --------------------------------------------------------------
@@ -104,7 +104,7 @@ gyr_r = df_squared["gyr_x"] ** 2 + df_squared["gyr_y"] ** 2 + df_squared["gyr_z"
 df_squared["acc_r"] = np.sqrt(acc_r)
 df_squared["gyr_r"] = np.sqrt(gyr_r)
 
-subset = df_squared[df_squared["set"] == 15]
+subset = df_squared[df_squared["set"] == 10]
 
 subset[["acc_r", "gyr_r"]].plot(subplots=True)
 
@@ -146,10 +146,10 @@ df_freq = df_temporal.copy().reset_index()
 FreqAbs = FourierTransformation()
 
 fs = int(1000 / 200)
-ws = int(2000 / 200)
+ws = int(2800 / 200)
 
 df_freq = FreqAbs.abstract_frequency(df_freq, ["acc_y"], ws, fs)
-len(df_freq.columns)
+df_freq.columns
 
 # Visualize results
 subset = df_freq[df_freq["set"] == 10]
@@ -159,8 +159,8 @@ subset[
         "acc_y_max_freq",
         "acc_y_freq_weighted",
         "acc_y_pse",
-        "acc_y_freq_1.5_Hz_ws_10", #I have changed this line
-        "acc_y_freq_2.5_Hz_ws_10", #I have changed this line
+        "acc_y_freq_1.429_Hz_ws_14", 
+        "acc_y_freq_2.5_Hz_ws_14", 
     ]
 ].plot()
 
